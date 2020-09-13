@@ -1,4 +1,4 @@
-"""Если понадобиться включить прокси, то необходимо добавить после 7 строки следующий код:
+"""Если понадобиться включить прокси, то необходимо добавить после 11 строки следующий код:
 
 PROXY = {'proxy_url': settings.PROXY_URL,
     'urllib3_proxy_kwargs': {'username': settings.PROXY_USERNAME, 'password': settings.PROXY_PASSWORD}}"""
