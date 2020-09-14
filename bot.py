@@ -4,6 +4,7 @@ PROXY = {'proxy_url': settings.PROXY_URL,
     'urllib3_proxy_kwargs': {'username': settings.PROXY_USERNAME, 'password': settings.PROXY_PASSWORD}}"""
 
 import logging
+import re
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import ephem
@@ -20,6 +21,15 @@ logging.basicConfig(filename='bot.log',
 def greet_user(update, context):
     print('Вызван /start')
     update.message.reply_text('Привет, пользователь! Ты вызвал команду /start')
+
+
+def wordcount(update, context):
+    user_text = str(update.message.text[10:])
+    print(user_text)
+    if len(user_text) == 0:
+        update.message.reply_text('Что мне считать, если ты мне отправил пустоту?')
+    else:
+        update.message.reply_text(f"Количество слов: {len(re.findall('[a-zA-Z_]+', user_text))}")
 
 
 def coord(update, context):
@@ -39,10 +49,15 @@ def coord(update, context):
         update.message.reply_text('Запрос неверен. Нужно запрашивать планету на англ. языке.')
 
 
+def full_moon(update, context):
+    date = ephem._datetime.utcnow()
+    update.message.reply_text(f"Следующее полнолуние будет {ephem.next_full_moon(date)}")
+
+
 def talk_to_me(update, context):
-    user_text = update.message.text
-    logging.info(user_text)
+    user_text = str(update.message.text)
     print(user_text)
+    logging.info(user_text)
     update.message.reply_text(user_text)
 
 
@@ -52,6 +67,8 @@ def main():
 
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
+    dp.add_handler(CommandHandler("wordcount", wordcount))
+    dp.add_handler(CommandHandler("fullmoon", full_moon))
     dp.add_handler(CommandHandler("planet", coord))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
