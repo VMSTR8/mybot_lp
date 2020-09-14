@@ -29,7 +29,7 @@ def wordcount(update, context):
     if len(user_text) == 0:
         update.message.reply_text('Что мне считать, если ты мне отправил пустоту?')
     else:
-        update.message.reply_text(f"Количество слов: {len(re.findall('[a-zA-Z_]+', user_text))}")
+        update.message.reply_text(f"Количество слов: {len(re.findall('[a-zA-Zа-яА-Я_]+', user_text))}")
 
 
 def coord(update, context):
