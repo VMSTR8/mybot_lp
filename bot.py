@@ -32,6 +32,16 @@ def wordcount(update, context):
         update.message.reply_text(f"Количество слов: {len(re.findall('[a-zA-Zа-яА-Я_]+', user_text))}")
 
 
+def calc(update, context):
+    user_text = str(update.message.text).split()[-1]
+    if re.findall('\d+? *?\+ *?\d+?', user_text):
+        update.message.reply_text(f"Ответ: {eval(user_text)}")
+    else:
+        update.message.reply_text(f"Что-то ты мне прислал ерунду какую-то.\n"
+                                  f"Пиши /calc и пример, который должен решить, а не вот это вот все.\n"
+                                  f"Помни, дробные числа нужно писать через точку, а не запятую!")
+
+
 def coord(update, context):
     planets = {'mercury': ephem.Mercury,
                'venus': ephem.Venus,
@@ -68,6 +78,7 @@ def main():
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(CommandHandler("wordcount", wordcount))
+    dp.add_handler(CommandHandler("calc", calc))
     dp.add_handler(CommandHandler("fullmoon", full_moon))
     dp.add_handler(CommandHandler("planet", coord))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))

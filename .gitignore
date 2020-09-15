@@ -1,4 +1,5 @@
 settings.py
+cities.py
 *.log
 .vscode/
 .idea/
