@@ -43,6 +43,7 @@ def wordcount(update, context):
 
 
 def calc(update, context):
+    user = update.message.from_user.username
     try:
         user_text = str(update.message.text).split()[-1]
         if ',' in user_text:
@@ -58,7 +59,7 @@ def calc(update, context):
     except ZeroDivisionError:
         update.message.reply_text(f"Себя на 0 подели. Школьную математику забыл?")
     except SyntaxError:
-        update.message.reply_text(f"У тебя в примере, это... Ошибка есть. Давай по новой.")
+        update.message.reply_text(f"У тебя в примере, это... Ошибка есть. Давай по новой, {user}.")
 
 
 def coord(update, context):
