@@ -25,7 +25,6 @@ logging.basicConfig(filename='bot.log',
 user_data = {}
 
 
-
 def greet_user(update, context):
     print('Вызван /start')
     update.message.reply_text('Привет, пользователь! Ты вызвал команду /start')
