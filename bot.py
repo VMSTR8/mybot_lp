@@ -23,6 +23,16 @@ def greet_user(update, context):
     update.message.reply_text('Привет, пользователь! Ты вызвал команду /start')
 
 
+# def cities_game(bot, update):
+#     if update.message.from_user.username not in user_data:
+#         user_data[update.message.from_user.username] = []
+#         user_data[update.message.from_user.username].append(update.message.text[8:])
+#         print(user_data)
+#     else:
+#         user_data[update.message.from_user.username].append(update.message.text[8:])
+#         print(user_data)
+
+
 def wordcount(update, context):
     user_text = str(update.message.text[10:])
     print(user_text)
@@ -47,6 +57,8 @@ def calc(update, context):
         update.message.reply_text(f"Не понимаю как это решить. Попробуй написать пример по-другому.")
     except ZeroDivisionError:
         update.message.reply_text(f"Себя на 0 подели. Школьную математику забыл?")
+    except SyntaxError:
+        update.message.reply_text(f"У тебя в примере, это... Ошибка есть. Давай по новой.")
 
 
 def coord(update, context):
