@@ -33,13 +33,22 @@ def wordcount(update, context):
 
 
 def calc(update, context):
-    user_text = str(update.message.text).split()[-1]
-    if re.findall('\d+? *?\+ *?\d+?', user_text):
-        update.message.reply_text(f"Ответ: {eval(user_text)}")
-    else:
+    try:
+        user_text = str(update.message.text).split()[-1]
+        if re.findall('(\d+).+?(\d+)', user_text):
+            update.message.reply_text(f"Ответ: {eval(user_text)}")
+        else:
+            update.message.reply_text(f"Что-то ты мне прислал ерунду какую-то.\n"
+                                      f"Пиши /calc и пример, который должен решить, а не вот это вот все.\n"
+                                      f"Помни, дробные числа нужно писать через точку, а не запятую!")
+    except NameError:
+        update.message.reply_text(f"Алло! Я тебе что, должен буквы или слова посчитать?\n"
+                                  f"Для этого есть /wordcount, кста. А в /calc цифры пиши, я тебе их посчитаю.")
+    except SyntaxError:
         update.message.reply_text(f"Что-то ты мне прислал ерунду какую-то.\n"
-                                  f"Пиши /calc и пример, который должен решить, а не вот это вот все.\n"
-                                  f"Помни, дробные числа нужно писать через точку, а не запятую!")
+                                  f"Пиши /calc и пример, который должен решить, а не вот это вот все.")
+    except ZeroDivisionError:
+        update.message.reply_text(f"Себя на 0 подели. Школьную математику забыл?")
 
 
 def coord(update, context):
