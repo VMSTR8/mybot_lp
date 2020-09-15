@@ -39,7 +39,6 @@ def city_game(update, context):
     if city not in cities_list:  # проверка, если названия города пользователя нет в списке городов
         update.message.reply_text('Не знаю такого города. Давай другой.')
     else:
-
         # если название города заканчивается на одну из указанных букв, то берём предпоследнюю
         if last_letter in 'ыъйь':
             last_letter = city[-2]
@@ -51,7 +50,6 @@ def city_game(update, context):
             # составляем список названий городов, которые начинаются на нужную букву и не были использованы. Выбираем
             # рандомное название города
             bot_city = random.choice([i for i in cities_list if i.startswith(last_letter) and i not in user_data[user]])
-
             update.message.reply_text(bot_city)  # отвечаем рандомным названием
             user_data[user].append(bot_city)  # добавляем рандомное название в список использованных для этого юзера
         else:
