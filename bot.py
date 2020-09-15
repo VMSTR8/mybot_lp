@@ -43,12 +43,8 @@ def calc(update, context):
         else:
             update.message.reply_text(f"Что-то ты мне прислал ерунду какую-то.\n"
                                       f"Пиши /calc и пример, который должен решить, а не вот это вот все.\n")
-    except NameError:
-        update.message.reply_text(f"Алло! Я тебе что, должен буквы или слова посчитать?\n"
-                                  f"Для этого есть /wordcount, кста. А в /calc цифры пиши, я тебе их посчитаю.")
-    except SyntaxError:
-        update.message.reply_text(f"Что-то ты мне прислал ерунду какую-то.\n"
-                                  f"Пиши /calc и пример, который должен решить, а не вот это вот все.")
+    except TypeError:
+        update.message.reply_text(f"Не понимаю как это решить. Попробуй написать пример по-другому.")
     except ZeroDivisionError:
         update.message.reply_text(f"Себя на 0 подели. Школьную математику забыл?")
 
