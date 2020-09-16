@@ -104,7 +104,7 @@ def calc(update, context):
         if ',' in user_text:
             user_text = user_text.replace(',', '.')
 
-        if re.findall('(\d+).+?(\d+)', user_text):
+        if re.findall('(\d+)[+-/*]+?(\d+)', user_text):
             update.message.reply_text(f"Ответ: {eval(user_text)}")
         else:
             update.message.reply_text(f"Что-то ты мне прислал ерунду какую-то.\n"
