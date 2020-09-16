@@ -108,7 +108,8 @@ def calc(update, context):
             update.message.reply_text(f"Ответ: {eval(user_text)}")
         else:
             update.message.reply_text(f"Что-то ты мне прислал ерунду какую-то.\n"
-                                      f"Пиши /calc и пример, который должен решить, а не вот это вот все.\n")
+                                      f"Пиши /calc и пример без пробелов, который я должен решить, "
+                                      f"а не вот это вот все.\n")
     except TypeError:
         update.message.reply_text(f"Не понимаю как это решить. Попробуй написать пример по-другому.")
     except ZeroDivisionError:
